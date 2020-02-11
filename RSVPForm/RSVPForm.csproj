@@ -69,8 +69,11 @@
     <Compile Include="PageObject\SignupForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsData\Person.cs" />
+    <Compile Include="TestsPage\ModBuilderTest.cs" />
+    <Compile Include="TestsPage\ModSalesAssTest.cs" />
+    <Compile Include="TestsPage\ModInstallerTest.cs" />
     <Compile Include="TestsPage\ModernismNegativeTest.cs" />
-    <Compile Include="TestsPage\ModernismTest.cs" />
+    <Compile Include="TestsPage\ModArchitecTest.cs" />
     <Compile Include="TestsPage\DesignerTest.cs" />
     <Compile Include="WebDriver\DriverUtils.cs" />
   </ItemGroup>

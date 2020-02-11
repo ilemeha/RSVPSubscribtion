@@ -24,6 +24,7 @@ namespace RSVPForm.PageObject
         //private IWebElement JoinBtn => _driver.FindElement(By.XPath("//a[contains(text(),'Sign Up')]"));
         private IWebElement JoinBtn => _driver.FindElement(By.XPath("//a[@href='#signup']"));
         private IWebElement FirstName => _driver.FindElement(By.Id("mce-FNAME"));
+        private IWebElement FNameError => _driver.FindElement(By.Id("mce-FNAME-error"));
         private IWebElement LastName => _driver.FindElement(By.Id("mce-LNAME"));
         private IWebElement EmailInput => _driver.FindElement(By.Id("mce-EMAIL"));
         private IWebElement PhoneNumberInput => _driver.FindElement(By.Id("mce-PHONE"));
@@ -39,7 +40,10 @@ namespace RSVPForm.PageObject
         private IWebElement Installer => _driver.FindElement(By.XPath("//*[@id='mce-PROFESS-5']/parent::label"));
         private IWebElement OtherProf => _driver.FindElement(By.XPath("//*[@id='mce-PROFESS-6']/parent::label"));
 
-        private IWebElement CompanyName => _driver.FindElement(By.Id("mce-FIRM"));
+        private IWebElement FirmName => _driver.FindElement(By.Id("mce-FIRM"));
+        private IWebElement CompanyName => _driver.FindElement(By.Id("mce-COMPANY"));
+        
+
 
         //List brands checkboxes
         private IWebElement SubZero => _driver.FindElement(By.XPath("//*[@id='mce-group[7567]-7567-1']/parent::label"));
@@ -80,6 +84,8 @@ namespace RSVPForm.PageObject
         //Would you like to be contacted about a project starting soon?*
         private IWebElement ContactYes => _driver.FindElement(By.XPath("//*[@id='mce-PROJECTCON-0']/parent::label"));
         private IWebElement ContactNo => _driver.FindElement(By.XPath("//*[@id='mce-PROJECTCON-1']/parent::label"));
+        private IWebElement YesNoError => _driver.FindElement(By.XPath("//*[@id='PROJECTCON-error']"));
+        
         //When will your project start?
         private IWebElement NumMonth => _driver.FindElement(By.Id("mce-SDATE-month"));
         private IWebElement NumDay => _driver.FindElement(By.Id("mce-SDATE-day"));
@@ -106,6 +112,11 @@ namespace RSVPForm.PageObject
             PhoneNumberInput.SendKeys("3124545656");
             PhoneNumberInput.SendKeys(Keys.Tab);
             PhoneNumberInput.SendKeys(Keys.PageDown);
+        }
+        public string FNameErrorMessage()
+        {
+            return FNameError.Text;
+        
         }
 
         public void CheckedYes()
@@ -141,14 +152,24 @@ namespace RSVPForm.PageObject
             {
                 Installer.Click();
             }
-            else
+            else if(profes == "BUILDER")
             {
                 Builder.Click();
             }
+            else
+            {
+                OtherProf.Click();
+            }
 
         }
-        public void FirmName(Person person)
+        public void FirmesName(Person person)
         {
+            FirmName.SendKeys(person.CompanyName);
+     
+        }
+        public void CompName(Person person)
+        {
+         
             CompanyName.SendKeys(person.CompanyName);
         }
         //Which brands do you prefer to specify? (Select all that apply)*
@@ -205,12 +226,12 @@ namespace RSVPForm.PageObject
             {
                 ElevenTwenty.Click();
             }
-            else 
+            else if (totalYears == "21")
             {
                 TwentyPlus.Click();
             }
             //Thread.Sleep(3000);
-            TwentyPlus.SendKeys(Keys.Tab);
+            //TwentyPlus.SendKeys(Keys.Tab);
         }
 
         //What is the average TOTAL value of your projects? (Select one)*
@@ -259,7 +280,7 @@ namespace RSVPForm.PageObject
             {
                 Kitchen251.Click();
             }
-            Kitchen251.SendKeys(Keys.Tab);
+            //Kitchen251.SendKeys(Keys.Tab);
         }
         //What type of projects do you work on most? (Select one)*
         public void ProjectsType(string typeP)
@@ -276,7 +297,7 @@ namespace RSVPForm.PageObject
             {
                 Both.Click();
             }
-          Both.SendKeys(Keys.Tab);
+         // Both.SendKeys(Keys.Tab);
         }
         //What are your professional social media handles?
         public void TwitMedia(string twit)
@@ -298,11 +319,19 @@ namespace RSVPForm.PageObject
             {
                 ContactYes.Click();
             }
-            else
+            else if (contact == "No")
             {
                 ContactNo.Click();
             }
-            ContactNo.SendKeys(Keys.Tab);
+            else 
+            {
+                ContactNo.SendKeys(Keys.Tab);
+            }
+        }
+        public string YesNoErrorMessage()
+        {
+           
+            return YesNoError.Text;
         }
 
         //When will your project start?

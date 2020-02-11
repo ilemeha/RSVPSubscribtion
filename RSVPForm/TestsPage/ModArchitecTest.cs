@@ -20,10 +20,10 @@ using System.Windows;
 namespace RSVPForm.TestsPage
 {
     [TestFixture]
-    public class ModernismTest
+    public class ModArchitecTest
     {
         [Test]
-        public void ModenismTestForm()
+        public void ModArchitecTestForm()
         {
             var person = new Person();
             using (var driver = DriverUtils.CreateWebDriver())
@@ -46,7 +46,7 @@ namespace RSVPForm.TestsPage
                 //"DESIGNER",  "ARCHITECT", "SERVICE TECH","SALES ASSOCIATE",  "INSTALLER",
                 rsvpForm.YourProfession("ARCHITECT");
                 Thread.Sleep(2000);
-                rsvpForm.FirmName(person);
+                rsvpForm.FirmesName(person);
                 Thread.Sleep(3000);
 
                 //Which brands
